@@ -18,8 +18,16 @@ require('todo')
 
   describe("#save") do
     it("adds a todo to the array of saved tasks") do
-    test_todo = Todo.new("wash the lion")
-    test_todo.save()
-    expect(Todo.all()).to(eq([test_todo]))
+      test_todo = Todo.new("wash the lion")
+      test_todo.save()
+      expect(Todo.all()).to(eq([test_todo]))
     end
   end
+
+  describe(".clear") do
+    it("empties out all of the saved todos") do
+      Todo.new("wash the lion").save()
+      Todo.clear()
+      expect(Todo.all()).to(eq([]))
+  end
+end
