@@ -2,6 +2,12 @@ require('rspec')
 require('todo')
 
   describe(Todo) do
+    before() do
+      Todo.clear()
+    end
+  end
+
+  describe(Todo) do
     describe("#description") do
       it("lets you give it a description") do
         test_todo = Todo.new("scrub the zebra")

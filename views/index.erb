@@ -1,0 +1,19 @@
+<h1 style="text-align: center; margin-bottom: 50px;">To Do <i class="fa fa-tasks"></i></h1>
+
+<p>Here are all your tasks:</p>
+
+<ul>
+  <% @todos.each() do |todo| %>
+  <li><%= todo.description() %></li>
+  <% end %>
+
+</ul>
+
+<p><i>Create a new todo:</i></p>
+
+<form action="/todo" method="post"> <!-- #Check if todo or todos -->
+  <label for="description">Todo Description</label>
+  <input id="description" name="description" type="text">
+
+  <button type="submit" class="btn-success">Add todo</button>
+</form>
