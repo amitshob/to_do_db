@@ -16,4 +16,8 @@ class Todo
   define_method(:save) do
     @@all_todos.push(self)
   end
+
+  define_singleton_method(:clear) do
+    @@all_todos = []
+  end
 end
