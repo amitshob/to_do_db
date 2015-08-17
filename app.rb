@@ -3,6 +3,8 @@ require("sinatra/reloader")
 also_reload("lib/**/*.rb")
 require("./lib/todo")
 
+DB = PG.connect({:dbname => to_do})
+
   get("/") do
     @todos = Todo.all()
     erb(:index)

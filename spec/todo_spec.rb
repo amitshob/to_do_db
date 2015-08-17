@@ -2,11 +2,19 @@ require('rspec')
 require('todo')
 require('pg')
 
+
+  # describe(Todo) do
+  #   before() do
+  #     Todo.clear()
+  #   end
+  # end
+
   DB = PG.connect({:dbname => 'to_do_test'})
 
   Rspec.configure do |config|
     DB.exec("DELETE FROM todos *;")
   end
+
 
   describe(Todo) do
     describe("#description") do
@@ -24,17 +32,27 @@ require('pg')
   end
 
   describe("#save") do
-    it("adds a todo to the array of saved tasks") do
-      test_todo = Todo.new("wash the lion")
-      test_todo.save()
-      expect(Todo.all()).to(eq([test_todo]))
+    it("adds a task to the array of saved tasks") do
+      test_task = Task.new({:description => "learn SQL"})
+      test_task.save()
+      expect(Task.all()).to(eq([test_task]))
     end
   end
 
-  describe(".clear") do
-    it("empties out all of the saved todos") do
-      Todo.new("wash the lion").save()
-      Todo.clear()
-      expect(Todo.all()).to(eq([]))
-  end
+#   describe(".clear") do
+#     it("empties out all of the saved todos") do
+#       Todo.new("wash the lion").save()
+#       Todo.clear()
+#       expect(Todo.all()).to(eq([]))
+#   end
+# end
+
+
+    describe("#==") do
+      it("is the same todo if it has the same description") do
+        todo1 = Todo.new({:description => "learn SQL"})
+        todo2 = Todo.new({:description => "learn SQL"})
+        expect(todo1).to(eq(todo2))
+      end
+    end
 end
