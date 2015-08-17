@@ -14,7 +14,7 @@ class Todo
     todos = []
     returned_todos.each() do |todo|
       description = todo.fetch("description")
-      todo.push(Todo.new({:description => description}))
+      todos.push(Todo.new({:description => description}))
     end
     todos
   end

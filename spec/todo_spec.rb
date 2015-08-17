@@ -11,7 +11,7 @@ require('pg')
 
   DB = PG.connect({:dbname => 'to_do_test'})
 
-  Rspec.configure do |config|
+  RSpec.configure do |config|
     DB.exec("DELETE FROM todos *;")
   end
 
@@ -19,8 +19,8 @@ require('pg')
   describe(Todo) do
     describe("#description") do
       it("lets you give it a description") do
-        test_todo = Todo.new("scrub the zebra")
-        expect(test_todo.description()).to(eq("scrub the zebra"))
+        test_todo = Todo.new({:description => "learn SQL"})
+        expect(test_todo.description()).to(eq("learn SQL"))
       end
     end
   end
@@ -32,10 +32,10 @@ require('pg')
   end
 
   describe("#save") do
-    it("adds a task to the array of saved tasks") do
-      test_task = Task.new({:description => "learn SQL"})
-      test_task.save()
-      expect(Task.all()).to(eq([test_task]))
+    it("adds a todo to the array of saved todos") do
+      test_todo = Todo.new({:description => "learn SQL"})
+      test_todo.save()
+      expect(Todo.all()).to(eq([test_todo]))
     end
   end
 
@@ -55,4 +55,3 @@ require('pg')
         expect(todo1).to(eq(todo2))
       end
     end
-end
