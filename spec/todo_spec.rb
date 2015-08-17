@@ -1,6 +1,7 @@
 require('rspec')
 require('todo')
 require('pg')
+require('spec_helper')
 
 
   # describe(Todo) do
@@ -19,21 +20,28 @@ require('pg')
   describe(Todo) do
     describe("#description") do
       it("lets you give it a description") do
-        test_todo = Todo.new({:description => "learn SQL"})
+        test_todo = Todo.new({:description => "learn SQL", :list_id => 1})
         expect(test_todo.description()).to(eq("learn SQL"))
       end
     end
   end
 
-  describe(".all") do
-    it("it is empty at first") do
-      expect(Todo.all()).to(eq([]))
+  describe("#list_id") do
+    it("lets you read the list ID out") do
+      test_todo = Todo.new({:description => "learn SQL", :list_id => 1})
+      expect(test_todo.list_id()).to(eq(1))
     end
   end
 
+  # describe(".all") do
+  #   it("it is empty at first") do
+  #     expect(Todo.all()).to(eq([]))
+  #   end
+  # end
+
   describe("#save") do
     it("adds a todo to the array of saved todos") do
-      test_todo = Todo.new({:description => "learn SQL"})
+      test_todo = Todo.new({:description => "learn SQL", :list_id => 1})
       test_todo.save()
       expect(Todo.all()).to(eq([test_todo]))
     end
@@ -49,9 +57,9 @@ require('pg')
 
 
     describe("#==") do
-      it("is the same todo if it has the same description") do
-        todo1 = Todo.new({:description => "learn SQL"})
-        todo2 = Todo.new({:description => "learn SQL"})
+      it("is the same todo if it has the same description and list ID") do
+        todo1 = Todo.new({:description => "learn SQL", :list_id => 1})
+        todo2 = Todo.new({:description => "learn SQL", :list_id => 1})
         expect(todo1).to(eq(todo2))
       end
     end
